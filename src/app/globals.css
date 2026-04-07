@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  --color-paper: #ffffff;
+  --color-paper-alt: #f8f9fb;
+  --color-ink: #1a1d23;
+  --color-ink-muted: #6b7280;
+  --color-accent: #0ea5e9;
+  --color-accent-soft: #e0f2fe;
+  --color-weekend: #0284c7;
+  --color-range-fill: rgba(14, 165, 233, 0.12);
+  --color-border: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --color-paper: #111318;
+  --color-paper-alt: #1c1f26;
+  --color-ink: #f1f5f9;
+  --color-ink-muted: #94a3b8;
+  --color-accent: #38bdf8;
+  --color-accent-soft: #082f49;
+  --color-weekend: #38bdf8;
+  --color-range-fill: rgba(56, 189, 248, 0.12);
+  --color-border: #334155;
+}
+
+[data-theme="sepia"] {
+  --color-paper: #f5ecd7;
+  --color-paper-alt: #ede0c8;
+  --color-ink: #2d1f0e;
+  --color-ink-muted: #78716c;
+  --color-accent: #b45309;
+  --color-accent-soft: #fef3c7;
+  --color-weekend: #b45309;
+  --color-range-fill: rgba(180, 83, 9, 0.12);
+  --color-border: #d6caaf;
+}
+
+@theme {
+  --color-paper: var(--color-paper);
+  --color-paper-alt: var(--color-paper-alt);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-weekend: var(--color-weekend);
+  --color-range-fill: var(--color-range-fill);
+  --color-calendar-border: var(--color-border);
+
+  --font-serif:
+    var(--font-playfair-display), ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-paper:
+    0 4px 24px -4px rgba(0, 0, 0, 0.1), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background-color: var(--color-paper-alt);
+  color: var(--color-ink);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  font-family: var(--font-sans);
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
