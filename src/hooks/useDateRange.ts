@@ -25,15 +25,25 @@ export function useDateRange() {
   }, [dispatch]);
 
   const isSelectedStart = useCallback(
-    (date: Date) => isSameDay(date, rangeStart),
-    [rangeStart],
+    (date: Date) => {
+      if (selectionPhase === "selecting" && rangeStart && hoverDate) {
+        const visualStart = rangeStart < hoverDate ? rangeStart : hoverDate;
+        return isSameDay(date, visualStart);
+      }
+      return isSameDay(date, rangeStart);
+    },
+    [rangeStart, hoverDate, selectionPhase],
   );
 
   const isSelectedEnd = useCallback(
-    (date: Date) =>
-      isSameDay(date, rangeEnd) ||
-      (selectionPhase === "selecting" && isSameDay(date, hoverDate)),
-    [rangeEnd, selectionPhase, hoverDate],
+    (date: Date) => {
+      if (selectionPhase === "selecting" && rangeStart && hoverDate) {
+        const visualEnd = rangeStart > hoverDate ? rangeStart : hoverDate;
+        return isSameDay(date, visualEnd);
+      }
+      return isSameDay(date, rangeEnd);
+    },
+    [rangeEnd, rangeStart, hoverDate, selectionPhase],
   );
 
   const isDayInRange = useCallback(
