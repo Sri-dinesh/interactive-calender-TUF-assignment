@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useCalendar } from "@/hooks/useCalendar";
 import { useDateRange } from "@/hooks/useDateRange";
 import { useNotes } from "@/hooks/useNotes";
@@ -10,6 +10,7 @@ import { DAYS_OF_WEEK } from "@/lib/constants";
 import { CalendarDay } from "./CalendarDay";
 import { motion } from "framer-motion";
 import clsx from "clsx";
+import { useLiquidFill } from "@/hooks/useLiquidFill";
 
 export function CalendarGrid() {
   const { state } = useCalendar();
@@ -23,6 +24,18 @@ export function CalendarGrid() {
   } = useDateRange();
   const { hasNote } = useNotes();
   const { getHoliday } = useHolidays();
+
+  const gridRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useLiquidFill(
+    state.rangeStart,
+    state.hoverDate,
+    state.rangeEnd,
+    state.selectionPhase,
+    gridRef,
+    canvasRef,
+  );
 
   const gridDays = useMemo(
     () => buildMonthGrid(viewYear, viewMonth),
@@ -45,7 +58,9 @@ export function CalendarGrid() {
         ))}
       </div>
       {/* calender grid */}
-      <div className="grid grid-cols-7 gap-y-2">
+      <div className="relative isolate" ref={gridRef}>
+        <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none w-full h-full" />
+        <div className="grid grid-cols-7 gap-y-2 overflow-hidden rounded-lg">
         {gridDays.map((dayObj, i) => {
           const dateKey = formatDateKey(dayObj.date);
           return (
@@ -69,6 +84,7 @@ export function CalendarGrid() {
             </motion.div>
           );
         })}
+      </div>
       </div>
     </div>
   );

@@ -41,16 +41,25 @@ export function CalendarDay({
         "relative flex items-center justify-center h-12 w-full touch-manipulation sm:cursor-pointer transition-colors duration-200",
         {
           "opacity-30": !isCurrentMonth,
-          "bg-range-fill": isInRange && !isSelected,
-          "rounded-l-full bg-range-fill":
-            isSelectedStart && isInRange && !isSelectedEnd,
-          "rounded-r-full bg-range-fill":
-            isSelectedEnd && isInRange && !isSelectedStart,
         },
       )}
+      data-date={date.getTime()}
       onClick={() => onClick(date)}
       onMouseEnter={() => onHover(date)}
     >
+      {/* liquid fill */}
+      <div
+        className={clsx(
+          "liquid-fill absolute inset-0 bg-accent/20 origin-left z-0 overflow-hidden",
+          {
+            "rounded-l-full": isSelectedStart && isInRange && !isSelectedEnd,
+            "rounded-r-full": isSelectedEnd && isInRange && !isSelectedStart,
+          }
+        )}
+        style={{ transform: "scaleX(0)" }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-px bg-black/5" />
+      </div>
       <motion.div
         layoutId={isSelected ? `selected-ring` : undefined}
         className={clsx(
