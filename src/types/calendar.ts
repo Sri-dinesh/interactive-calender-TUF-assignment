@@ -29,6 +29,7 @@ export interface CalendarState {
   notes: Record<string, string>;
   theme: ThemeType;
   heroImage: string;
+  navDirection: "prev" | "next" | null;
 }
 
 export type CalendarAction =

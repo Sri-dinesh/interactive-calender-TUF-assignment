@@ -13,6 +13,7 @@ const initialState: CalendarState = {
   notes: {},
   theme: "light",
   heroImage: `/images/months/${new Date().getMonth() + 1}.jpg`,
+  navDirection: null,
 };
 
 function calendarReducer(
@@ -37,6 +38,7 @@ function calendarReducer(
         viewMonth: newMonth,
         viewYear: newYear,
         heroImage: `/images/months/${newMonth + 1}.jpg`,
+        navDirection: action.direction,
       };
     }
     case "SELECT_DAY": {
@@ -118,6 +120,7 @@ function calendarReducer(
         viewMonth: now.getMonth(),
         viewYear: now.getFullYear(),
         heroImage: `/images/months/${now.getMonth() + 1}.jpg`,
+        navDirection: null,
       };
     }
     default:
