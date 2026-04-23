@@ -43,14 +43,14 @@ export function CalendarGrid() {
   );
 
   return (
-    <div className="flex-1 px-4 py-6 md:px-8 bg-paper">
-      <div className="grid grid-cols-7 mb-4">
+    <div className="flex-1 px-4 py-6 md:px-8 bg-paper border-l-4 border-ink">
+      <div className="grid grid-cols-7 mb-4 border-b-4 border-ink pb-2">
         {DAYS_OF_WEEK.map((day, i) => (
           <div
             key={day}
             className={clsx(
-              "text-center text-xs md:text-sm font-semibold tracking-widest",
-              i === 5 || i === 6 ? "text-weekend" : "text-ink-muted",
+              "text-center text-sm md:text-base font-black tracking-widest uppercase",
+              i === 5 || i === 6 ? "text-accent" : "text-ink",
             )}
           >
             {day}
@@ -59,16 +59,17 @@ export function CalendarGrid() {
       </div>
       {/* calender grid */}
       <div className="relative isolate" ref={gridRef}>
-        <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none w-full h-full" />
-        <div className="grid grid-cols-7 gap-y-2 overflow-hidden rounded-lg">
+        <canvas ref={canvasRef} className="absolute inset-0 z-20 pointer-events-none w-full h-full mix-blend-difference" />
+        <div className="grid grid-cols-7 gap-1 overflow-hidden bg-ink p-1 border-2 border-ink shadow-brutal">
         {gridDays.map((dayObj, i) => {
           const dateKey = formatDateKey(dayObj.date);
           return (
             <motion.div
               key={dateKey}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2, delay: i * 0.015 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.15, delay: i * 0.01, ease: "backOut" }}
+              className="bg-paper"
             >
               <CalendarDay
                 day={dayObj}

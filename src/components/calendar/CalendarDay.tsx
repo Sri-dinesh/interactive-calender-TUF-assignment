@@ -38,9 +38,10 @@ export function CalendarDay({
   return (
     <div
       className={clsx(
-        "relative flex items-center justify-center h-12 w-full touch-manipulation sm:cursor-pointer transition-colors duration-200",
+        "relative flex items-center justify-center h-12 md:h-16 w-full touch-manipulation sm:cursor-pointer transition-colors duration-0",
         {
-          "opacity-30": !isCurrentMonth,
+          "opacity-20 grayscale": !isCurrentMonth,
+          "hover:bg-ink hover:text-paper": isCurrentMonth && !isSelected,
         },
       )}
       data-date={date.getTime()}
@@ -50,43 +51,40 @@ export function CalendarDay({
       {/* liquid fill */}
       <div
         className={clsx(
-          "liquid-fill absolute inset-0 bg-accent/20 origin-left z-0 overflow-hidden",
+          "liquid-fill absolute inset-0 bg-accent origin-left z-0 overflow-hidden mix-blend-multiply",
           {
-            "rounded-l-full": isSelectedStart && isInRange && !isSelectedEnd,
-            "rounded-r-full": isSelectedEnd && isInRange && !isSelectedStart,
+            "border-l-4 border-y-4 border-ink": isSelectedStart && isInRange && !isSelectedEnd,
+            "border-r-4 border-y-4 border-ink": isSelectedEnd && isInRange && !isSelectedStart,
+            "border-y-4 border-ink": isInRange && !isSelectedStart && !isSelectedEnd,
+            "border-4 border-ink": isSelectedStart && isSelectedEnd,
           }
         )}
         style={{ transform: "scaleX(0)" }}
       >
-        <div className="absolute top-0 left-0 right-0 h-px bg-black/5" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-ink/20" />
       </div>
       <motion.div
         layoutId={isSelected ? `selected-ring` : undefined}
         className={clsx(
-          "relative z-10 w-10 h-10 flex items-center justify-center rounded-full text-base font-medium",
+          "relative z-10 w-full h-full flex items-center justify-center text-lg font-black",
           {
-            "bg-accent text-white shadow-md": isSelected,
-            "text-weekend font-bold":
-              isWeekend && isCurrentMonth && !isSelected,
+            "bg-accent text-ink border-4 border-ink shadow-brutal": isSelected,
+            "text-accent": isWeekend && isCurrentMonth && !isSelected,
             "text-ink": !isWeekend && isCurrentMonth && !isSelected,
-            "hover:bg-border": !isSelected && isCurrentMonth,
           },
         )}
       >
         {dateNum}
 
         {isToday && !isSelected && (
-          <div className="absolute inset-0 border-2 border-accent rounded-full animate-pulse-ring" />
-        )}
-        {isToday && !isSelected && (
-          <div className="absolute inset-0 border-2 border-accent rounded-full" />
+          <div className="absolute inset-1 border-4 border-ink pointer-events-none" />
         )}
 
         {hasNote && (
           <div
             className={clsx(
-              "absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full border border-white",
-              isSelected ? "bg-white" : "bg-accent",
+              "absolute top-1 right-1 w-3 h-3 border-2 border-ink",
+              isSelected ? "bg-paper" : "bg-accent",
             )}
           />
         )}
@@ -94,8 +92,8 @@ export function CalendarDay({
         {isHoliday && (
           <div
             className={clsx(
-              "absolute -bottom-1 -right-1 w-2h-2 h-2 w-2 rounded-full",
-              isSelected ? "bg-white/80" : "bg-red-400",
+              "absolute bottom-1 right-1 w-3 h-3 border-2 border-ink",
+              isSelected ? "bg-paper" : "bg-yellow-400",
             )}
             title={isHoliday}
           />

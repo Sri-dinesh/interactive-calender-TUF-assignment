@@ -24,33 +24,36 @@ export function HeroPanel() {
   const { viewMonth, viewYear } = state;
 
   return (
-    <div className="relative w-full h-[35vh] md:h-[40vh] overflow-hidden rounded-t-xl bg-gray-200">
+    <div className="relative w-full h-[35vh] md:h-[40vh] overflow-hidden bg-ink border-b-4 border-ink">
       <AnimatePresence mode="popLayout">
         <motion.img
           key={`${viewYear}-${viewMonth}`}
           src={MONTH_IMAGES[viewMonth]}
           alt={`${MONTHS[viewMonth]} Hero`}
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={{ opacity: 0, scale: 1.05 }}
+          className="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-80 contrast-150 grayscale"
+          initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.3, ease: "circOut" }}
         />
       </AnimatePresence>
 
-      {/* diagonal shape */}
+      {/* geometric brutalist overlay */}
       <div
-        className="absolute bottom-0 left-0 w-full h-3/5 bg-accent opacity-95"
+        className="absolute bottom-0 left-0 w-full h-full bg-accent mix-blend-multiply opacity-50"
+      />
+      <div 
+        className="absolute top-0 right-0 w-1/2 h-full bg-ink"
         style={{
-          clipPath: "polygon(0 50%, 45% 100%, 100% 30%, 100% 100%, 0 100%)",
+          clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
         }}
       />
 
-      <div className="absolute bottom-6 right-8 text-right text-white drop-shadow-md z-10">
-        <div className="text-2xl font-sans tracking-widest opacity-90">
+      <div className="absolute bottom-6 right-8 text-right text-paper drop-shadow-[4px_4px_0_rgba(0,0,0,1)] z-10 flex flex-col items-end">
+        <div className="text-3xl font-sans font-bold tracking-[0.5em] bg-ink text-paper px-2 py-1 mb-2 border-2 border-paper">
           {viewYear}
         </div>
-        <div className="text-4xl md:text-5xl font-serif font-bold uppercase tracking-tight">
+        <div className="text-6xl md:text-8xl font-serif font-black uppercase tracking-tighter leading-none">
           {MONTHS[viewMonth]}
         </div>
       </div>

@@ -1,39 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --color-paper: #ffffff;
-  --color-paper-alt: #f8f9fb;
-  --color-ink: #1a1d23;
-  --color-ink-muted: #6b7280;
-  --color-accent: #0ea5e9;
-  --color-accent-soft: #e0f2fe;
-  --color-weekend: #0284c7;
-  --color-range-fill: rgba(14, 165, 233, 0.12);
-  --color-border: #e5e7eb;
+  --color-paper: #e5e5e5;
+  --color-paper-alt: #ffffff;
+  --color-ink: #000000;
+  --color-ink-muted: #555555;
+  --color-accent: #ff3300;
+  --color-accent-soft: #ffccbc;
+  --color-weekend: #ff3300;
+  --color-range-fill: rgba(255, 51, 0, 0.15);
+  --color-border: #000000;
 }
 
 [data-theme="dark"] {
-  --color-paper: #111318;
-  --color-paper-alt: #1c1f26;
-  --color-ink: #f1f5f9;
-  --color-ink-muted: #94a3b8;
-  --color-accent: #38bdf8;
-  --color-accent-soft: #082f49;
-  --color-weekend: #38bdf8;
-  --color-range-fill: rgba(56, 189, 248, 0.12);
-  --color-border: #334155;
+  --color-paper: #000000;
+  --color-paper-alt: #111111;
+  --color-ink: #ffffff;
+  --color-ink-muted: #aaaaaa;
+  --color-accent: #00ffcc;
+  --color-accent-soft: #004d40;
+  --color-weekend: #00ffcc;
+  --color-range-fill: rgba(0, 255, 204, 0.15);
+  --color-border: #ffffff;
 }
 
 [data-theme="sepia"] {
-  --color-paper: #f5ecd7;
-  --color-paper-alt: #ede0c8;
-  --color-ink: #2d1f0e;
-  --color-ink-muted: #78716c;
-  --color-accent: #b45309;
-  --color-accent-soft: #fef3c7;
-  --color-weekend: #b45309;
-  --color-range-fill: rgba(180, 83, 9, 0.12);
-  --color-border: #d6caaf;
+  --color-paper: #f4f0ec;
+  --color-paper-alt: #e8e2d9;
+  --color-ink: #2b2b2b;
+  --color-ink-muted: #666666;
+  --color-accent: #ff00ff;
+  --color-accent-soft: #f8c8f8;
+  --color-weekend: #ff00ff;
+  --color-range-fill: rgba(255, 0, 255, 0.15);
+  --color-border: #2b2b2b;
 }
 
 @theme {
@@ -47,13 +47,12 @@
   --color-range-fill: var(--color-range-fill);
   --color-calendar-border: var(--color-border);
 
-  --font-serif:
-    var(--font-playfair-display), ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-syne), "Arial Black", impact, sans-serif;
+  --font-sans: var(--font-space-grotesk), "Courier New", Courier, monospace;
 
-  --shadow-paper:
-    0 4px 24px -4px rgba(0, 0, 0, 0.1), 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  --shadow-paper: 12px 12px 0px var(--color-ink);
+  --shadow-brutal: 4px 4px 0px var(--color-ink);
+  --shadow-brutal-hover: 8px 8px 0px var(--color-ink);
 }
 
 body {

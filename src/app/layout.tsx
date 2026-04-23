@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Syne, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-playfair-display",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
+  weight: ["400", "700", "800"], // Added weights for bold headers
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -25,10 +26,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfairDisplay.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${syne.variable} ${spaceGrotesk.variable} h-full antialiased`}
       data-theme="light"
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans cursor-none">{children}</body>
     </html>
   );
 }
